@@ -57,7 +57,7 @@ class comandos(commands.Cog):
     
     @commands.command()
     async def repositorio(self, ctx):
-        embed=discord.Embed(title="Não disponível no momento ", color=cor)
+        embed=discord.Embed(title="https://github.com/Gabriel-bits/Bot-discord_v1", color=cor)
         await ctx.send(embed=embed)
 
 
@@ -72,6 +72,10 @@ class comandos(commands.Cog):
         embed.add_field(name="* `?Str_tutorial`", value=f"ex:({Pref}Str_codg) endisponivel por em quanto vai tmnc passei tres dia fazendo cada codg dessa aba.", inline=False)
         embed.set_footer(text="por enquanto e so.\r")
         await ctx.send(embed=embed)
+
+
+    
+
 
     '''
     cmds dos bot:
@@ -88,6 +92,7 @@ class comandos(commands.Cog):
         if frase is None:
             await ctx.send(Pref+"fala + alguma coisa")
             return
+        await ctx.message.delete()
         await ctx.send(f"{frase}")
 
 
@@ -167,11 +172,11 @@ class comandos(commands.Cog):
         msg = await ctx.send(embed=embed)
         await msg.add_reaction('✅')
 
-
+"""
     @commands.command()
     async def Str_codg(self, ctx):
 
-        with open(f"{ctx.author.id}.json", "r") as f:
+        with open(f"perfils/{ctx.author.id}.json", "r") as f:
             perfil = json.load(f)
 
         id_usuar = str(perfil["nome"])
@@ -212,7 +217,7 @@ body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
 
         await ctx.send(f"@{ctx.author.name}:\r{codg_c}")
 
-    """
+
 
 
 
@@ -225,8 +230,17 @@ body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
     @commands.command()
     async def Str_perfil(self, ctx, args:discord.Member, args2, *, args3):
         '''
-        args
+        !! cuidado area perigosa !!
+        args = id do usuario
+        args2 = imagem not_speack
+        args3 = imagem speack
         '''
+
+        if args == None is args2 == None is args3 == None:
+            embed=discord.Embed(title=f"Confira, se digitou o comando corretamente.\rexp: ```{Pref}Str_perfil``` + @voce + imagem_defalt + imagem_falando", color=cor)
+            await ctx.send(embed=embed)
+            return
+
         try:
             salvar_profil(args.id, args2, args3)
 
@@ -235,7 +249,7 @@ body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
             await ctx.send(embed=embed)
             return
 
-        with open(f"{ctx.author.id}.json", "r") as f:
+        with open(f"perfils/{ctx.author.id}.json", "r") as f:
             perfil = json.load(f)
 
         id_usuario = str(args.id)
@@ -271,8 +285,7 @@ content:url('''+imag2+''');
 li.voice-state{ position: static; }
 div.user{ position: absolute; left:40%; bottom:5%; }
 
-body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; } ``` '''
-        
+body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; } ``` ''' 
 
         await ctx.send(f"@{ctx.author.name}:\r{codg_c}")
 

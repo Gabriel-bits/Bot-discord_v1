@@ -3,6 +3,7 @@ from discord.ext.commands import AutoShardedBot, when_mentioned_or
 from Secrect import Secret
 from docs import comandos
 import musi
+import os
 
 Pref = "?"
 pera = 'discord.ext.commands.errors.CommandNotFound'
@@ -20,6 +21,16 @@ async def on_ready():
     game = discord.Game("pica na sua mina")
 #    await client.change_presence(status=discord.Status.idle, activity=game)
     await client.change_presence(activity=discord.Streaming(name=Pref+'help', url='https://www.twitch.tv/narutozini'))
+
+
+@client.event
+async def on_ready():
+    if not os.path.exists("perfils"):
+        os.mkdir("testaNdo")
+    else:
+        pass
+
+
 
 modulos = ["docs.comandos","musi"]
 
